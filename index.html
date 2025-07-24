@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candle World - Crypto Exchange</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(45deg, #f59e0b, #fbbf24);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .chart-container {
+            height: 400px;
+        }
+        #priceChart {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-gray-100">
+    <!-- Header -->
+    <header class="header glass-effect fixed top-0 w-full z-50 py-4">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center">
+                <div class="nav-brand flex items-center text-2xl font-bold">
+                    <i class="fas fa-fire text-amber-400 mr-2"></i>
+                    <span>Candle World</span>
+                </div>
+                <ul class="nav-menu hidden md:flex gap-8">
+                    <li><a href="#markets" class="hover:text-amber-400 transition">Markets</a></li>
+                    <li><a href="#trade" class="hover:text-amber-400 transition">Trade</a></li>
+                    <li><a href="#wallet" class="hover:text-amber-400 transition">Wallet</a></li>
+                    <li><a href="#about" class="hover:text-amber-400 transition">About</a></li>
+                </ul>
+                <div class="nav-actions flex gap-4">
+                    <button class="btn-login border-2 border-amber-400 text-amber-400 px-4 py-2 rounded-lg hover:-translate-y-1 transition">Login</button>
+                    <button class="btn-signup bg-amber-400 text-blue-900 px-4 py-2 rounded-lg font-bold hover:-translate-y-1 transition">Sign Up</button>
+                </div>
+                <button class="md:hidden text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero pt-32 pb-20 px-4 text-center">
+        <div class="container mx-auto max-w-4xl">
+            <div class="hero-content">
+                <h1 class="gradient-text text-4xl md:text-6xl font-bold mb-6">Trade Crypto with Confidence</h1>
+                <p class="text-xl opacity-90 mb-8">Join the most advanced crypto trading platform with real-time analytics, AI-powered insights, and institutional-grade security.</p>
+                <button class="cta-button bg-gradient-to-r from-amber-400 to-amber-200 text-blue-900 px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg hover:-translate-y-1 transition">Start Trading Now</button>
+            </div>
+            <div class="hero-stats flex flex-wrap justify-center gap-8 mt-12">
+                <div class="stat">
+                    <p class="text-lg">24h Volume</p>
+                    <h3 class="text-3xl text-amber-400 font-bold">$4.2B+</h3>
+                </div>
+                <div class="stat">
+                    <p class="text-lg">Assets</p>
+                    <h3 class="text-3xl text-amber-400 font-bold">150+</h3>
+                </div>
+                <div class="stat">
+                    <p class="text-lg">Users</p>
+                    <h3 class="text-3xl text-amber-400 font-bold">5M+</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Overview -->
+    <section id="markets" class="market-overview bg-white py-12 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-blue-900 mb-8 text-center">Market Overview</h2>
+            <div class="crypto-ticker flex overflow-x-auto scrollbar-hide gap-6 py-4 justify-start md:justify-center">
+                <div class="ticker-item bg-gray-50 p-4 rounded-xl shadow-md min-w-[200px]">
+                    <div class="flex items-center mb-2">
+                        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="Bitcoin" class="w-6 h-6 mr-2">
+                        <h4 class="text-blue-900 font-bold">Bitcoin</h4>
+                    </div>
+                    <p class="price text-green-600 text-xl font-bold">$42,318.75</p>
+                    <p class="change positive text-sm">+2.45% <i class="fas fa-arrow-up"></i></p>
+                </div>
+                <div class="ticker-item bg-gray-50 p-4 rounded-xl shadow-md min-w-[200px]">
+                    <div class="flex items-center mb-2">
+                        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="Ethereum" class="w-6 h-6 mr-2">
+                        <h4 class="text-blue-900 font-bold">Ethereum</h4>
+                    </div>
+                    <p class="price text-green-600 text-xl font-bold">$2,315.42</p>
+                    <p class="change positive text-sm">+1.87% <i class="fas fa-arrow-up"></i></p>
+                </div>
+                <div class="ticker-item bg-gray-50 p-4 rounded-xl shadow-md min-w-[200px]">
+                    <div class="flex items-center mb-2">
+                        <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Solana" class="w-6 h-6 mr-2">
+                        <h4 class="text-blue-900 font-bold">Solana</h4>
+                    </div>
+                    <p class="price text-red-500 text-xl font-bold">$98.76</p>
+                    <p class="change negative text-sm">-0.65% <i class="fas fa-arrow-down"></i></p>
+                </div>
+                <div class="ticker-item bg-gray-50 p-4 rounded-xl shadow-md min-w-[200px]">
+                    <div class="flex items-center mb-2">
+                        <img src="https://cryptologos.cc/logos/cardano-ada-logo.png" alt="Cardano" class="w-6 h-6 mr-2">
+                        <h4 class="text-blue-900 font-bold">Cardano</h4>
+                    </div>
+                    <p class="price text-green-600 text-xl font-bold">$0.5123</p>
+                    <p class="change positive text-sm">+3.21% <i class="fas fa-arrow-up"></i></p>
+                </div>
+                <div class="ticker-item bg-gray-50 p-4 rounded-xl shadow-md min-w-[200px]">
+                    <div class="flex items-center mb-2">
+                        <img src="https://cryptologos.cc/logos/polkadot-new-dot-logo.png" alt="Polkadot" class="w-6 h-6 mr-2">
+                        <h4 class="text-blue-900 font-bold">Polkadot</h4>
+                    </div>
+                    <p class="price text-red-500 text-xl font-bold">$6.78</p>
+                    <p class="change negative text-sm">-1.12% <i class="fas fa-arrow-down"></i></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trading Section -->
+    <section id="trade" class="trading-section bg-gray-50 py-16 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-blue-900 mb-12 text-center">Trade Crypto Instantly</h2>
+            <div class="trading-interface grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="exchange-form bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-6">Exchange</h3>
+                    <div class="exchange-inputs">
+                        <div class="input-group mb-6">
+                            <label class="block text-blue-900 font-bold mb-2">You Pay</label>
+                            <div class="crypto-input flex gap-3">
+                                <select class="flex-1 p-3 border-2 border-gray-200 rounded-lg">
+                                    <option>BTC</option>
+                                    <option>ETH</option>
+                                    <option>SOL</option>
+                                    <option>ADA</option>
+                                    <option>DOT</option>
+                                </select>
+                                <input type="number" placeholder="0.00" class="flex-1 p-3 border-2 border-gray-200 rounded-lg">
+                            </div>
+                        </div>
+                        <div class="swap-button my-4 text-center">
+                            <button class="bg-amber-400 p-3 rounded-full text-blue-900 text-xl hover:rotate-180 transition-transform">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                        </div>
+                        <div class="input-group mb-6">
+                            <label class="block text-blue-900 font-bold mb-2">You Receive</label>
+                            <div class="crypto-input flex gap-3">
+                                <select class="flex-1 p-3 border-2 border-gray-200 rounded-lg">
+                                    <option>ETH</option>
+                                    <option>BTC</option>
+                                    <option>SOL</option>
+                                    <option>ADA</option>
+                                    <option>DOT</option>
+                                </select>
+                                <input type="number" placeholder="0.00" class="flex-1 p-3 border-2 border-gray-200 rounded-lg">
+                            </div>
+                        </div>
+                        <div class="input-group mb-6">
+                            <label class="block text-blue-900 font-bold mb-2">Wallet Address</label>
+                            <input type="text" placeholder="Enter your wallet address" class="w-full p-3 border-2 border-gray-200 rounded-lg">
+                        </div>
+                    </div>
+                    <button class="exchange-btn bg-gradient-to-r from-blue-900 to-blue-700 text-white p-4 rounded-lg text-lg font-bold hover:shadow-lg hover:-translate-y-1 transition">Exchange Now</button>
+                </div>
+                <div class="trading-chart bg-white p-6 rounded-xl shadow-lg">
+                    <div class="chart-container">
+                        <canvas id="priceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Markets Section -->
+    <section class="markets-section bg-white py-16 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-blue-900 mb-8 text-center">Top Cryptocurrencies</h2>
+            <div class="market-filters flex flex-wrap justify-center gap-4 mb-8">
+                <button class="filter-btn border-2 border-blue-900 text-blue-900 px-6 py-2 rounded-full hover:bg-blue-900 hover:text-white transition active">All</button>
+                <button class="filter-btn border-2 border-blue-900 text-blue-900 px-6 py-2 rounded-full hover:bg-blue-900 hover:text-white transition">Gainers</button>
+                <button class="filter-btn border-2 border-blue-900 text-blue-900 px-6 py-2 rounded-full hover:bg-blue-900 hover:text-white transition">Losers</button>
+                <button class="filter-btn border-2 border-blue-900 text-blue-900 px-6 py-2 rounded-full hover:bg-blue-900 hover:text-white transition">DeFi</button>
+                <button class="filter-btn border-2 border-blue-900 text-blue-900 px-6 py-2 rounded-full hover:bg-blue-900 hover:text-white transition">NFTs</button>
+            </div>
+            <div class="markets-table bg-white rounded-xl shadow-lg overflow-hidden">
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-blue-900 text-white">
+                            <th class="p-4 text-left">Asset</th>
+                            <th class="p-4 text-right">Price</th>
+                            <th class="p-4 text-right">24h Change</th>
+                            <th class="p-4 text-right">Market Cap</th>
+                            <th class="p-4 text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-200 hover:bg-gray-50">
+                            <td class="p-4 flex items-center">
+                                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="Bitcoin" class="w-8 h-8 mr-3">
+                                <span class="font-bold">Bitcoin</span>
+                                <span class="text-gray-500 ml-2">BTC</span>
+                            </td>
+                            <td class="p-4 text-right font-bold">$42,318.75</td>
+                            <td class="p-4 text-right text-green-600 font-bold">+2.45%</td>
+                            <td class="p-4 text-right">$814.2B</td>
+                            <td class="p-4 text-right"><button class="trade-btn bg-amber-400 text-blue-900 px-4 py-2 rounded font-bold">Trade</button></td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-50">
+                            <td class="p-4 flex items-center">
+                                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="Ethereum" class="w-8 h-8 mr-3">
+                                <span class="font-bold">Ethereum</span>
+                                <span class="text-gray-500 ml-2">ETH</span>
+                            </td>
+                            <td class="p-4 text-right font-bold">$2,315.42</td>
+                            <td class="p-4 text-right text-green-600 font-bold">+1.87%</td>
+                            <td class="p-4 text-right">$278.5B</td>
+                            <td class="p-4 text-right"><button class="trade-btn bg-amber-400 text-blue-900 px-4 py-2 rounded font-bold">Trade</button></td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-50">
+                            <td class="p-4 flex items-center">
+                                <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Solana" class="w-8 h-8 mr-3">
+                                <span class="font-bold">Solana</span>
+                                <span class="text-gray-500 ml-2">SOL</span>
+                            </td>
+                            <td class="p-4 text-right font-bold">$98.76</td>
+                            <td class="p-4 text-right text-red-500 font-bold">-0.65%</td>
+                            <td class="p-4 text-right">$42.1B</td>
+                            <td class="p-4 text-right"><button class="trade-btn bg-amber-400 text-blue-900 px-4 py-2 rounded font-bold">Trade</button></td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-50">
+                            <td class="p-4 flex items-center">
+                                <img src="https://cryptologos.cc/logos/cardano-ada-logo.png" alt="Cardano" class="w-8 h-8 mr-3">
+                                <span class="font-bold">Cardano</span>
+                                <span class="text-gray-500 ml-2">ADA</span>
+                            </td>
+                            <td class="p-4 text-right font-bold">$0.5123</td>
+                            <td class="p-4 text-right text-green-600 font-bold">+3.21%</td>
+                            <td class="p-4 text-right">$18.0B</td>
+                            <td class="p-4 text-right"><button class="trade-btn bg-amber-400 text-blue-900 px-4 py-2 rounded font-bold">Trade</button></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 flex items-center">
+                                <img src="https://cryptologos.cc/logos/polkadot-new-dot-logo.png" alt="Polkadot" class="w-8 h-8 mr-3">
+                                <span class="font-bold">Polkadot</span>
+                                <span class="text-gray-500 ml-2">DOT</span>
+                            </td>
+                            <td class="p-4 text-right font-bold">$6.78</td>
+                            <td class="p-4 text-right text-red-500 font-bold">-1.12%</td>
+                            <td class="p-4 text-right">$8.5B</td>
+                            <td class="p-4 text-right"><button class="trade-btn bg-amber-400 text-blue-900 px-4 py-2 rounded font-bold">Trade</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wallet Section -->
+    <section id="wallet" class="wallet-section bg-gray-50 py-16 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-blue-900 mb-12 text-center">Your Crypto Wallet</h2>
+            <div class="wallet-interface grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="wallet-balance bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4">Total Balance</h3>
+                    <div class="total-balance mb-8">
+                        <p class="text-gray-500 mb-2">Estimated Value</p>
+                        <p class="balance-amount text-green-600 text-3xl font-bold">$12,456.78</p>
+                    </div>
+                    <div class="wallet-qr text-center mb-6">
+                        <div class="bg-gray-200 p-4 rounded-lg inline-block">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=wallet-address-example" alt="Wallet QR Code" class="w-32 h-32">
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2">Scan to receive crypto</p>
+                    </div>
+                </div>
+                <div class="wallet-assets bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4">Your Assets</h3>
+                    <div class="asset-list">
+                        <div class="asset-item flex justify-between items-center py-3 border-b border-gray-200">
+                            <div class="flex items-center">
+                                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="Bitcoin" class="w-6 h-6 mr-3">
+                                <span class="font-bold">BTC</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold">0.0425 BTC</p>
+                                <p class="text-gray-500 text-sm">$1,798.13</p>
+                            </div>
+                        </div>
+                        <div class="asset-item flex justify-between items-center py-3 border-b border-gray-200">
+                            <div class="flex items-center">
+                                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="Ethereum" class="w-6 h-6 mr-3">
+                                <span class="font-bold">ETH</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold">1.245 ETH</p>
+                                <p class="text-gray-500 text-sm">$2,882.70</p>
+                            </div>
+                        </div>
+                        <div class="asset-item flex justify-between items-center py-3 border-b border-gray-200">
+                            <div class="flex items-center">
+                                <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Solana" class="w-6 h-6 mr-3">
+                                <span class="font-bold">SOL</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold">12.5 SOL</p>
+                                <p class="text-gray-500 text-sm">$1,234.50</p>
+                            </div>
+                        </div>
+                        <div class="asset-item flex justify-between items-center py-3">
+                            <div class="flex items-center">
+                                <img src="https://cryptologos.cc/logos/cardano-ada-logo.png" alt="Cardano" class="w-6 h-6 mr-3">
+                                <span class="font-bold">ADA</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold">1,250 ADA</p>
+                                <p class="text-gray-500 text-sm">$640.25</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wallet-actions bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4">Quick Actions</h3>
+                    <button class="wallet-btn bg-blue-900 text-white p-4 rounded-lg mb-4 w-full hover:bg-blue-800 transition">
+                        <i class="fas fa-exchange-alt mr-2"></i> Swap Crypto
+                    </button>
+                    <button class="wallet-btn bg-blue-900 text-white p-4 rounded-lg mb-4 w-full hover:bg-blue-800 transition">
+                        <i class="fas fa-arrow-up mr-2"></i> Send
+                    </button>
+                    <button class="wallet-btn bg-blue-900 text-white p-4 rounded-lg mb-4 w-full hover:bg-blue-800 transition">
+                        <i class="fas fa-arrow-down mr-2"></i> Receive
+                    </button>
+                    <button class="wallet-btn bg-blue-900 text-white p-4 rounded-lg mb-4 w-full hover:bg-blue-800 transition">
+                        <i class="fas fa-lock mr-2"></i> Security
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="about" class="contact-section bg-blue-900 py-16 px-4 text-center">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold text-white mb-8">Need Help? Contact Us</h2>
+            <div class="contact-card bg-white bg-opacity-10 p-8 rounded-xl backdrop-blur-sm">
+                <div class="contact-details space-y-4">
+                    <p><i class="fas fa-envelope text-amber-400"></i> support@candleworld.com</p>
+                    <p><i class="fas fa-phone text-amber-400"></i> +1 (800) 555-1234</p>
+                    <p><i class="fas fa-map-marker-alt text-amber-400"></i> 123 Crypto Street, Blockchain City</p>
+                </div>
+                <div class="social-links mt-8 flex justify-center gap-6">
+                    <a href="#" class="text-2xl hover:text-amber-400 transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-2xl hover:text-amber-400 transition"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="text-2xl hover:text-amber-400 transition"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="text-2xl hover:text-amber-400 transition"><i class="fab fa-medium"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-950 py-8 px-4 text-gray-300">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="footer-brand flex items-center mb-4 md:mb-0">
+                    <i class="fas fa-fire text-amber-400 mr-2 text-xl"></i>
+                    <span class="text-xl font-bold">Candle World</span>
+                </div>
+                <div class="footer-links flex flex-wrap justify-center gap-6">
+                    <a href="#" class="hover:text-amber-400 transition">Terms</a>
+                    <a href="#" class="hover:text-amber-400 transition">Privacy</a>
+                    <a href="#" class="hover:text-amber-400 transition">API</a>
+                    <a href="#" class="hover:text-amber-400 transition">Fees</a>
+                    <a href="#" class="hover:text-amber-400 transition">Blog</a>
+                </div>
+            </div>
+            <div class="text-center mt-8 text-sm">
+                <p>© 2023 Candle World. All rights reserved.</p>
+                <p class="mt-2">Cryptocurrency trading involves significant risk and may result in the loss of your invested capital.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AI Assistant -->
+    <div id="aiAssistant" class="ai-assistant fixed bottom-5 right-5 w-80 h-96 bg-white rounded-xl shadow-xl z-50 hidden flex-col">
+        <div class="ai-header bg-blue-900 text-white p-4 rounded-t-xl flex justify-between items-center">
+            <h3 class="font-bold">Candle World AI Assistant</h3>
+            <button id="closeAi" class="text-white hover:text-amber-400">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="ai-chat flex-1 p-4 overflow-y-auto">
+            <div class="ai-message bg-gray-100 p-3 rounded-lg mb-3">
+                <p>Hello! I'm your Candle World AI assistant. How can I help you with your crypto trading today?</p>
+            </div>
+        </div>
+        <div class="ai-input flex p-4 border-t border-gray-200">
+            <input type="text" placeholder="Ask me anything..." class="flex-1 p-2 border border-gray-300 rounded-lg mr-2">
+            <button class="bg-blue-900 text-white px-4 rounded-lg">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <button id="aiToggle" class="ai-toggle fixed bottom-5 right-5 w-14 h-14 bg-amber-400 text-blue-900 rounded-full shadow-lg flex items-center justify-center text-2xl z-40">
+        <i class="fas fa-robot"></i>
+    </button>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="modal-content bg-white p-8 rounded-xl max-w-md w-full relative">
+            <button id="closeLogin" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="text-2xl font-bold text-blue-900 mb-6">Login to Candle World</h2>
+            <form>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Email</label>
+                    <input type="email" class="w-full p-3 border border-gray-300 rounded-lg">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-2">Password</label>
+                    <input type="password" class="w-full p-3 border border-gray-300 rounded-lg">
+                </div>
+                <button type="submit" class="w-full bg-blue-900 text-white p-3 rounded-lg font-bold hover:bg-blue-800 transition">Login</button>
+                <p class="text-center mt-4 text-gray-600">Don't have an account? <a href="#" class="text-blue-900 font-bold">Sign up</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Initialize price chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('priceChart').getContext('2d');
+            const priceChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'BTC/USD Price',
+                        data: [30000, 32000, 35000, 38000, 40000, 42000, 45000, 43000, 41000, 40000, 42000, 45000],
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            // AI Assistant toggle
+            const aiToggle = document.getElementById('aiToggle');
+            const aiAssistant = document.getElementById('aiAssistant');
+            const closeAi = document.getElementById('closeAi');
+
+            aiToggle.addEventListener('click', function() {
+                aiAssistant.classList.toggle('hidden');
+            });
+
+            closeAi.addEventListener('click', function() {
+                aiAssistant.classList.add('hidden');
+            });
+
+            // Login modal
+            const loginButtons = document.querySelectorAll('.btn-login');
+            const loginModal = document.getElementById('loginModal');
+            const closeLogin = document.getElementById('closeLogin');
+
+            loginButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    loginModal.classList.remove('hidden');
+                });
+            });
+
+            closeLogin.addEventListener('click', function() {
+                loginModal.classList.add('hidden');
+            });
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === loginModal) {
+                    loginModal.classList.add('hidden');
+                }
+            });
+
+            // Smooth scrolling for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
